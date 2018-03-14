@@ -2,38 +2,28 @@ import QtQuick 2.7
 import QtQuick.Controls 2.0
 import QtQuick.Layouts 1.3
 
-
-
 Item {
     id: root
     width: 500
     height: 700
-
     property double responsive: ( root.width < root.height)? root.width/500: root.height/700
-
     MultiPointTouchArea {
         id: zoneTactile
         anchors.fill : parent
         mouseEnabled: true
-
         touchPoints : TouchPoint {
             id : touch
             property int startX: 0
             property int startY: 0
         }
-
-
-
         onPressed: {
             touch.startX = touch.x;
             touch.startY = touch.y;
         }
-
         onReleased: {
             var deltaX = touch.x - touch.startX;
             var deltaY = touch.y - touch.startY;
             var horizontal = Math.abs(deltaX) > Math.abs(deltaY);
-
             if ( horizontal ) {
                 if (deltaX > 20){
                     Context.setDirection("right");
@@ -42,7 +32,6 @@ Item {
                     Context.setDirection("left");
                 }
             }
-
             else {
                 if (deltaY > 20){
                     Context.setDirection("down");
@@ -53,8 +42,6 @@ Item {
             }
         }
     }
-
-
 Plateau {
     id: grid
 }
@@ -74,8 +61,6 @@ Rectangle{
         verticalAlignment: Text.AlignVCenter
     }
 }
-
-
 Rectangle {
     id: newGameButton
     x : (root.width < root.height)? grid.x : 10
@@ -84,7 +69,6 @@ Rectangle {
     height: 60 * root.responsive
     color: "#4480f7"
     radius: 10
-
     border.color: "#7a7d81"
     border.width: 3
     Text {
